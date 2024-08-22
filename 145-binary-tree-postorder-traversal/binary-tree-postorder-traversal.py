@@ -8,19 +8,21 @@ class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         if(not root):
             return []
+            
         stack1 = []
         stack2 = []
+        post = []
 
         stack1.append(root)
-        while stack1:
+        while(stack1):
             root = stack1.pop()
             stack2.append(root.val)
             if(root.left):
                 stack1.append(root.left)
             if(root.right):
                 stack1.append(root.right)
-
-        post = []
-        while stack2:
-            post.append(stack2.pop())
+        
+        while(stack2):
+            num = stack2.pop()
+            post.append(num)
         return post
