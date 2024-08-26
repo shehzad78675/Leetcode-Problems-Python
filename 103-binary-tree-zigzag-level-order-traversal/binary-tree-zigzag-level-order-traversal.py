@@ -9,14 +9,15 @@ class Solution:
         if root is None:
             return []
 
-        queue = [root]
+        queue = deque()
+        queue.append(root)
         level_order = []
         level = 1
         while queue:
             in_list = []
             size = len(queue)
             for i in range(size):
-                node = queue.pop(0)
+                node = queue.popleft()
                 in_list.append(node.val)
                 if(node.left):
                     queue.append(node.left)
