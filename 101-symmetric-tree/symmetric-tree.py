@@ -12,7 +12,7 @@ class Solution:
         def solve(root1, root2):
             if(root1 is None and root2 is None):
                 return True
-            if(root1 is not None and root2 is None or root1 is None and root2 is not None):
+            if(root1 is None or root2 is None):
                 return False
             if(root1.val != root2.val):
                 return False
