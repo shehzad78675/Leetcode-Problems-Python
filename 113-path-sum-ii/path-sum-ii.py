@@ -10,12 +10,15 @@ class Solution:
         def treePaths(root, target, path):
             if not root:
                 return
-            
+
             path.append(root.val)
-            if not root.left and not root.right and root.val == target:
+            if not root.left and not root.right:
                 paths.append(list(path))
                 path.pop()
                 return
+            
+            # if not root.left and not root.right and root.val == target:
+               
 
             treePaths(root.left, target - root.val, path)
             treePaths(root.right, target - root.val, path)
@@ -24,4 +27,14 @@ class Solution:
 
         path = []
         treePaths(root, targetSum, path)
-        return paths
+
+        new_paths = []
+
+        for i in range(len(paths)):
+            sum = 0
+            for j in range(len(paths[i])):
+                sum += paths[i][j]
+            
+            if sum == targetSum:
+                new_paths.append(paths[i])
+        return new_paths
