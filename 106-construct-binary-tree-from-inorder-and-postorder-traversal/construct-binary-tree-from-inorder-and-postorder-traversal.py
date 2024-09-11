@@ -6,18 +6,19 @@
 #         self.right = right
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        def build(ino, inS, inE, post, postS, postE):
-            if inS > inE or postS > postE:
+        def build(inorder, si, ei, postorder, sp, ep):
+            if si > ei or sp > ep:
                 return None
-            
-            root = TreeNode(post[postE])
 
-            in_root = ino.index(root.val)
-            nums_left = in_root - inS
+            root = TreeNode(postorder[ep])
 
-            root.left = build(ino, inS, in_root - 1, post, postS, postS + nums_left-1)
-            root.right = build(ino, in_root+1, inE, post, postS + nums_left, postE-1)
+            root_index = inorder.index(postorder[ep])
+            nums_left = root_index - si
+
+            root.left = build(inorder, si, root_index - 1, postorder, sp, sp + nums_left - 1)
+            root.right = build(inorder, root_index + 1, ei, postorder, sp + nums_left, ep - 1)
 
             return root
-        
+
         return build(inorder, 0, len(inorder)-1, postorder, 0, len(postorder)-1)
+
