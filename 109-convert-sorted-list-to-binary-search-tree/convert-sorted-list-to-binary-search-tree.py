@@ -11,12 +11,12 @@
 #         self.right = right
 class Solution:
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
-        if not head:
+        if head is None:
             return None
-
-        # if not head.next:
-        #     return TreeNode(head.val)
-
+        
+        if head.next is None:
+            return TreeNode(head.val)
+        
         slow = head
         fast = head
         prev = None
@@ -25,12 +25,13 @@ class Solution:
             prev = slow
             slow = slow.next
             fast = fast.next.next
-
+        
         root = TreeNode(slow.val)
-        if prev:
-            prev.next = None
+        prev.next = None
 
-            root.left = self.sortedListToBST(head)
-            root.right = self.sortedListToBST(slow.next)
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(slow.next)
 
         return root
+
+        r
