@@ -11,6 +11,7 @@ class Solution:
                 return None
             
             root = TreeNode(preorder[ind[0]])
+
             ind[0] += 1
 
             root.left = bst(preorder, root.val, ind)
