@@ -7,21 +7,19 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         heap = []
+
         heapq.heapify(heap)
 
         def findKth(root):
-            if root is None:
+            if not root:
                 return
             
-            heapq.heappush(heap, (-1) * root.val)
-
+            heapq.heappush(heap, -1 * root.val)
             if len(heap) > k:
                 heapq.heappop(heap)
 
             findKth(root.left)
             findKth(root.right)
-
+        
         findKth(root)
-
-        return (-1) * heapq.heappop(heap) 
-            
+        return -1 * heapq.heappop(heap)
