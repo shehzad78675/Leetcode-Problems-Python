@@ -1,24 +1,22 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        n = len(isConnected)
-        vis = [0] * n
+        cities = len(isConnected)
+        prov = 0
 
+
+        vis = [0] * cities
         def dfs(city):
             vis[city] = 1
-            q = deque()
-            q.append(city)
-            while q:
-                node = q.popleft()
 
-                for neigb, connected in enumerate(isConnected[node]):
-                    if vis[neigb] == 0 and connected == 1:
-                        vis[neigb] = 1
-                        q.append(neigb)
+            for neigb, connected in enumerate(isConnected[city]):
+                if vis[neigb] == 0 and connected == 1:
+                    dfs(neigb)
 
-        prov = 0
-        for city in range(n):
+
+        for city in range(cities):
             if vis[city] == 0:
                 dfs(city)
                 prov += 1
 
+            
         return prov
