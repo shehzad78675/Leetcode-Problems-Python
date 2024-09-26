@@ -5,9 +5,15 @@ class Solution:
 
         def dfs(city):
             vis[city] = 1
-            for neigb, connected in enumerate(isConnected[city]):
-                if vis[neigb] == 0 and connected == 1:
-                    dfs(neigb)
+            q = deque()
+            q.append(city)
+            while q:
+                node = q.popleft()
+
+                for neigb, connected in enumerate(isConnected[node]):
+                    if vis[neigb] == 0 and connected == 1:
+                        vis[neigb] = 1
+                        q.append(neigb)
 
         prov = 0
         for city in range(n):
