@@ -11,22 +11,22 @@ class Solution:
         k = len(lists)
         heap = []
 
-        # Initialize the heap with the head nodes of each list
+        
         for i in range(k):
-            if lists[i]:  # Only add non-null nodes
+            if lists[i]:
                 heapq.heappush(heap, (lists[i].val, i))
         
         dummy = ListNode(-1)
-        current = dummy
+        tem = dummy
         
         while heap:
             num, ind = heapq.heappop(heap)
-            current.next = ListNode(num)  # Add the smallest value to the merged list
-            current = current.next
-            
-            # Move to the next node in the list from which we extracted the value
+           
             lists[ind] = lists[ind].next
-            if lists[ind]:  # If there's a next node, push it to the heap
+            if lists[ind]:
                 heapq.heappush(heap, (lists[ind].val, ind))
+            
+            tem.next = ListNode(num)
+            tem = tem.next
 
         return dummy.next
